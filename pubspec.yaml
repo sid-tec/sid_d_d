@@ -1,0 +1,41 @@
+#############################
+#  Ver: 3.0 - last: 30/01/23
+#############################
+name: sid_d_d
+description: A librarie for implement Domain Driven Design in Dart.
+version: 3.0.0
+# homepage: https://www.example.com
+environment:
+  sdk: '2.19.6'
+  # sdk: '>=3.0.0-89.0.dev'
+dev_dependencies:
+  lints: ^2.0.1
+  test: ^1.16.0
+dependencies:
+  equatable: ^2.0.3
+  meta: ^1.8.0
+  uuid: ^3.0.5
+#
+#        ┈┈┈╭━━╮┈┈┈┈┈┈
+#        ┈┈╭╯┊◣╰━━━━╮┈┈
+#        ┈┈┃┊┊┊╱▽▽▽┛┈┈  
+#        ┈┈┃┊┊┊~~~   ┈┈┈┈
+#        ━━╯┊┊┊╲△△△┓┈┈
+#        ┊┊┊┊╭━━━━━━╯┈┈  
+#     _____     _     _____   
+#    / ____|   | |   |  __ \  
+#   | (___     | |   | |  | | 
+#    \___ \    | |   | |  | | 
+#    ____) |   |_|   | |__| | 
+#   |_____/    (_)   |_____/  
+#   _______   ______    _____ 
+#  |__   __| |  ____|  / ____|
+#     | |    | |__    | |     
+#     | |    |  __|   | |     
+#     | |    | |____  | |____ 
+#     |_|    |______|  \_____|
+#
+#-< Designed by Sedinir Consentini >-
+#   -< Rio de Janeiro @ MMXXII >-
+#--> May the source be with you! <---
+#
