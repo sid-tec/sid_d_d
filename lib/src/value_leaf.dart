@@ -13,7 +13,7 @@ import 'failure.dart';
 // #############################
 
 @immutable
-abstract class ValueLeaf<T> extends Equatable implements Value {
+abstract class ValueLeaf<T> extends Equatable implements Value<T> {
   //
   final T _value;
   //
@@ -46,8 +46,7 @@ abstract class ValueLeaf<T> extends Equatable implements Value {
   //
   // ===========================
   @override // FOR Value
-  Iterable<dynamic> value({required String what}) =>
-      what == _what ? [_value] : [];
+  T whatValue(String what, T erro) => what == _what ? _value : erro;
 
   //
   // ===========================

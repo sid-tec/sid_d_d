@@ -10,7 +10,7 @@ import 'value.dart';
 // #  Validated Value Objects
 // #############################
 
-class ValueTree extends Equatable implements Value {
+class ValueTree extends Equatable implements Value<Iterable<dynamic>> {
   //
   final String _what;
   //
@@ -44,9 +44,9 @@ class ValueTree extends Equatable implements Value {
   }
 
   @override
-  Iterable<dynamic> value({required String what}) {
+  Iterable<dynamic> whatValue(String what, Iterable<dynamic> erro) {
     var r = [];
-    for (var v in _values) {
+    for (Value v in _values) {
       if (v.what == what) r.add(v);
     }
     return r;

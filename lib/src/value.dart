@@ -6,7 +6,7 @@
 // #  Validated Value Objects
 // #############################
 
-abstract class Value {
+abstract class Value<T> {
   //
   // ===========================
   String get what;
@@ -17,7 +17,7 @@ abstract class Value {
 
   //
   // ===========================
-  Iterable<dynamic> value({required String what});
+  T whatValue(String what, T erro);
 
   //
   // ===========================
