@@ -43,6 +43,15 @@ class ValueTree extends Equatable implements Value {
     return [map];
   }
 
+  @override
+  Iterable<dynamic> value({required String what}) {
+    var r = [];
+    for (var v in _values) {
+      if (v.what == what) r.add(v);
+    }
+    return r;
+  }
+
   //
   // ===========================
   @override // FOR Value

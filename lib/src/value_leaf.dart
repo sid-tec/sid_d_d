@@ -46,6 +46,12 @@ abstract class ValueLeaf<T> extends Equatable implements Value {
   //
   // ===========================
   @override // FOR Value
+  Iterable<dynamic> value({required String what}) =>
+      what == _what ? [_value] : [];
+
+  //
+  // ===========================
+  @override // FOR Value
   Iterable<Map<String, dynamic>> get failures => [
         {_what: _failures}
       ];

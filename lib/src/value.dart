@@ -17,6 +17,14 @@ abstract class Value {
 
   //
   // ===========================
+  Iterable<dynamic> value({required String what});
+
+  //
+  // ===========================
+  //Iterable<dynamic> failure({required String what});
+
+  //
+  // ===========================
   Iterable<Map<String, dynamic>> get failures;
 
   //
