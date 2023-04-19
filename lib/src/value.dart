@@ -6,7 +6,8 @@
 // #  Validated Value Objects
 // #############################
 
-abstract class Value<T> {
+//abstract class Value<T> {
+abstract class Value {
   //
   // ===========================
   String get what;
@@ -17,7 +18,7 @@ abstract class Value<T> {
 
   //
   // ===========================
-  T whatValue(String what, T erro);
+  //T whatValue(String what, T erro);
 
   //
   // ===========================

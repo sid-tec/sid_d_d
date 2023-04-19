@@ -12,8 +12,10 @@ import 'failure.dart';
 // #  Validated Value Objects
 // #############################
 
+//@immutable
+//abstract class ValueLeaf<T> extends Equatable implements Value<T> {
 @immutable
-abstract class ValueLeaf<T> extends Equatable implements Value<T> {
+abstract class ValueLeaf<T> extends Equatable implements Value {
   //
   final T _value;
   //
@@ -45,8 +47,8 @@ abstract class ValueLeaf<T> extends Equatable implements Value<T> {
 
   //
   // ===========================
-  @override // FOR Value
-  T whatValue(String what, T erro) => what == _what ? _value : erro;
+/*   @override // FOR Value
+  T whatValue(String what, T erro) => what == _what ? _value : erro; */
 
   //
   // ===========================

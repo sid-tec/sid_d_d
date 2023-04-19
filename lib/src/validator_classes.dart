@@ -289,6 +289,19 @@ class ValidatorDateFormat implements Validator<String> {
             ];
 }
 
+class ValidatorPastDateTime implements Validator<String> {
+  //
+  @override // FOR Validator
+  List<Failure> failures({required String value}) {
+    var fList = ValidatorDateFormat().failures(value: value);
+    if (fList.isEmpty && DateTime.parse(value).compareTo(DateTime.now()) > 0) {
+      fList.add(Failure(
+          'Failure: Value must be a DateTime before now, Value: $value, Type: ${value.runtimeType}'));
+    }
+    return fList;
+  }
+}
+
 // #############################
 // #  Ver: 3.0 - last: 30/01/23
 // #  Nullsafety
