@@ -3,7 +3,7 @@ import 'package:sid_d_d/sid_d_d.dart';
 void main() {
   final name = Name(what: 'nome', value: 'asdasdas dasdHitler');
   //
-  print(name.values);
+  print(name.value);
 
   print(name);
 
@@ -13,7 +13,7 @@ void main() {
   }
 
   final date = Date(what: 'data', value: DateTime.now().toString());
-  print(date.values);
+  print(date.value);
 
   print('failures:');
   var datev = date.failures;
@@ -36,16 +36,16 @@ void main() {
     nome2: 'carioca',
     nascimento2: '2016-06-30 17:09:21.422952',
   );
-  print(person.values);
+  print(person.value);
   //print(person.value('name').getOr(replace: 'ERRO'));
   //print(person.value('name').runtimeType);
 
-  for (var element in person.values) {
-    print(element['pessoa']['idade'].runtimeType);
-  }
-  Helper.treePrint(person.values.first);
+    print(person.value);
+ /*  for (var element in person.value) {
+  } */
+  //Helper.treePrint(person.value);
   var nome = Name(what: 'nome', value: 'Adolf');
-  print(nome.values);
+  print(nome.value);
   print(nome.runtimeType);
   var erros = nome.failures;
   print(erros);
@@ -77,11 +77,11 @@ void main() {
   print(mino == mino2);
 
   print(mino.failures);
-  print(mino.valid);
+  print(mino.isValid);
   print(mino2.failures);
-  print(mino2.valid);
+  print(mino2.isValid);
 
-  Helper.treePrint(mino.failures.first);
+  //Helper.treePrint(mino.failures);
 
 /*   final persons = Container<Person>();
   persons.add(group: person);

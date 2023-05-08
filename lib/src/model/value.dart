@@ -1,15 +1,30 @@
-import 'failure.dart';
-
 // #############################
 // #  Ver: 3.0 - last: 30/01/23
 // #  Nullsafety
-// #  Validator Interface
+// #  Composite Pattern
+// #  Interface Class for
+// #  Validated Value Objects
 // #############################
 
-abstract class Validator<T> {
+//abstract class Value<T> {
+import 'package:sid_d_d/sid_d_d.dart';
+
+abstract class Value<T> {
   //
   // ===========================
-  List<Failure> failures({required T value});
+  String get what;
+
+  //
+  // ===========================
+  T get value;
+
+  //
+  // ===========================
+  Iterable<Failure> get failures;
+
+  //
+  // ===========================
+  bool get isValid;
 }
 //
 //          ┈┈┈╭━━╮┈┈┈┈┈┈

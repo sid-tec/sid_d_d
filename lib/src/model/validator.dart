@@ -1,36 +1,15 @@
+import 'failure.dart';
+
 // #############################
 // #  Ver: 3.0 - last: 30/01/23
 // #  Nullsafety
-// #  Composite Pattern
-// #  Interface Class for
-// #  Validated Value Objects
+// #  Validator Interface
 // #############################
 
-//abstract class Value<T> {
-abstract class Value {
+abstract class Validator<T> {
   //
   // ===========================
-  String get what;
-
-  //
-  // ===========================
-  Iterable<Map<String, dynamic>> get values;
-
-  //
-  // ===========================
-  //T whatValue(String what, T erro);
-
-  //
-  // ===========================
-  //Iterable<dynamic> failure({required String what});
-
-  //
-  // ===========================
-  Iterable<Map<String, dynamic>> get failures;
-
-  //
-  // ===========================
-  bool get valid;
+  Iterable<Failure> failures({required T value});
 }
 //
 //          ┈┈┈╭━━╮┈┈┈┈┈┈

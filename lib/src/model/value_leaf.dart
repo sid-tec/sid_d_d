@@ -1,29 +1,35 @@
+import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 //
 import 'value.dart';
+import 'failure.dart';
 
 // #############################
 // #  Ver: 3.0 - last: 30/01/23
 // #  Nullsafety
 // #  Composite Pattern
-// #  Tree Class for
+// #  Leaf Class for
 // #  Validated Value Objects
 // #############################
 
-//class ValueTree extends Equatable implements Value<Iterable<dynamic>> {
-class ValueTree extends Equatable implements Value {
+@immutable
+abstract class ValueLeaf<T> extends Equatable implements Value<T> {
+  //
+  final T _value;
   //
   final String _what;
   //
-  final Iterable<Value> _values;
+  final Iterable<Failure> _failures;
 
   //
   // ===========================
-  ValueTree({
+  const ValueLeaf({
+    required T value,
     required String what,
-    required Iterable<Value> values,
-  })  : _what = what,
-        _values = values;
+    required Iterable<Failure> failures,
+  })  : _value = value,
+        _failures = failures,
+        _what = what;
 
   //
   // ===========================
@@ -33,60 +39,34 @@ class ValueTree extends Equatable implements Value {
   //
   // ===========================
   @override // FOR Value
-  Iterable<Map<String, dynamic>> get values {
-    //
-    var map = <String, dynamic>{what: {}};
-    //
-    for (final value in _values) {
-      map[what].addAll(value.values.first);
-    }
-    //
-    return [map];
-  }
-
-/*   @override
-  Iterable<dynamic> whatValue(String what, Iterable<dynamic> erro) {
-    var r = [];
-    for (Value v in _values) {
-      if (v.what == what) r.add(v);
-    }
-    return r;
-  } */
+  T get value => _value;
 
   //
   // ===========================
   @override // FOR Value
-  Iterable<Map<String, dynamic>> get failures {
-    //
-    var map = <String, dynamic>{what: {}};
-    //
-    for (final value in _values) {
-      map[what].addAll(value.failures.first);
-    }
-    //
-    return [map];
-  }
+  Iterable<Failure> get failures => _failures;
 
   //
   // ===========================
   @override // FOR Value
-  bool get valid {
-    for (final value in _values) {
-      if (!value.valid) return false;
-    }
-    //
-    return true;
-  }
+  bool get isValid => _failures.isEmpty;
 
   //
   // ===========================
-  @override // FOR Equatable
-  bool get stringify => true;
+  //@override // FOR Equatable
+  //bool get stringify => true;
+  @override
+  String toString() {
+    // TODO: implement toString
+    return '-- What: $_what | Type: ${_value.runtimeType} | Value: $_value | Failures: $_failures !!';
+  }
+
   //
   // ===========================
   @override // FOR Equatable
   List<Object> get props => [
-        _values,
+        _value as Object,
+        _failures,
         _what,
       ];
 }

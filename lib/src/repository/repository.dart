@@ -1,5 +1,5 @@
-import 'failure.dart';
-import 'value_tree.dart';
+import '../model/failure.dart';
+import '../model/value_tree.dart';
 
 abstract class Repository {
   Stream<(Iterable<Failure>, Iterable<ValueTree>)> watchAll();

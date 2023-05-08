@@ -5,10 +5,10 @@
 // #  Sid D D
 // #############################
 
-export 'failure.dart' show Failure;
+export 'model/failure.dart' show Failure;
 //
-export 'validator.dart' show Validator;
-export 'validator_classes.dart'
+export 'model/validator.dart' show Validator;
+export 'implementation/validator_classes.dart'
     show
         ValidatorUuid,
         ValidatorFunction,
@@ -24,9 +24,9 @@ export 'validator_classes.dart'
         ValidatorMaxValue,
         ValidatorMinValue;
 //
-export 'value.dart' show Value;
-export 'value_leaf.dart' show ValueLeaf;
-export 'value_leaf_classes.dart'
+export 'model/value.dart' show Value;
+export 'model/value_leaf.dart' show ValueLeaf;
+export 'implementation/value_leaf_classes.dart'
     show
         UniqueId,
         BoolVo,
@@ -38,8 +38,8 @@ export 'value_leaf_classes.dart'
         UrlAddress,
         Upc;
 //
-export 'value_tree.dart' show ValueTree;
-export 'value_tree_classes.dart' show Address, Person;
+export 'model/value_tree.dart' show ValueTree;
+export 'implementation/value_tree_classes.dart' show Address, Person;
 //
 export 'helper.dart' show Helper;
 //

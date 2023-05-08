@@ -1,7 +1,7 @@
 import 'package:uuid/uuid.dart';
 //
-import 'value_leaf.dart';
-import 'failure.dart';
+import '../model/value_leaf.dart';
+import '../model/failure.dart';
 import 'validator_classes.dart';
 
 // #############################

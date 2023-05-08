@@ -1,5 +1,5 @@
-import 'validator.dart';
-import 'failure.dart';
+import '../model/validator.dart';
+import '../model/failure.dart';
 
 // #############################
 // #  Ver: 3.0 - last: 30/01/23
@@ -22,7 +22,7 @@ class ValidatorFunction implements Validator<dynamic> {
   //
   // ===========================
   @override // FOR Validator
-  List<Failure> failures({required dynamic value}) => function(value)
+  Iterable<Failure> failures({required dynamic value}) => function(value)
       ? []
       : [
           Failure(
@@ -41,7 +41,7 @@ class ValidatorPositive implements Validator<num> {
   //
   // ===========================
   @override // FOR Validator
-  List<Failure> failures({required num value}) => value.isNegative
+  Iterable<Failure> failures({required num value}) => value.isNegative
       ? [
           Failure(
               'Failure: Value must be positive, Value: $value, Type: ${value.runtimeType}'),
@@ -60,7 +60,7 @@ class ValidatorNegative implements Validator<num> {
   //
   // ===========================
   @override
-  List<Failure> failures({required num value}) => value.isNegative
+  Iterable<Failure> failures({required num value}) => value.isNegative
       ? []
       : [
           Failure(
@@ -89,7 +89,7 @@ class ValidatorMinValue implements Validator<num> {
   const ValidatorMinValue({required this.min});
   //
   @override // FOR Validator
-  List<Failure> failures({required num value}) => value >= min
+  Iterable<Failure> failures({required num value}) => value >= min
       ? []
       : [
           Failure(
@@ -118,7 +118,7 @@ class ValidatorMaxValue implements Validator<num> {
   const ValidatorMaxValue({required this.max});
   //
   @override // FOR Validator
-  List<Failure> failures({required num value}) => value <= max
+  Iterable<Failure> failures({required num value}) => value <= max
       ? []
       : [
           Failure(
@@ -147,7 +147,7 @@ class ValidatorRegExp implements Validator<String> {
   const ValidatorRegExp({required this.regExp});
   //
   @override // FOR Validator
-  List<Failure> failures({required String value}) => regExp.hasMatch(value)
+  Iterable<Failure> failures({required String value}) => regExp.hasMatch(value)
       ? []
       : [
           Failure(
@@ -176,7 +176,7 @@ class ValidatorMinLength implements Validator<String> {
   const ValidatorMinLength({required this.min});
   //
   @override // FOR Validator
-  List<Failure> failures({required String value}) => value.length >= min
+  Iterable<Failure> failures({required String value}) => value.length >= min
       ? []
       : [
           Failure(
@@ -205,7 +205,7 @@ class ValidatorMaxLength implements Validator<String> {
   const ValidatorMaxLength({required this.max});
   //
   @override // FOR Validator
-  List<Failure> failures({required String value}) => value.length <= max
+  Iterable<Failure> failures({required String value}) => value.length <= max
       ? []
       : [
           Failure(
@@ -230,7 +230,7 @@ class ValidatorMaxLength implements Validator<String> {
 class ValidatorSingleLine implements Validator<String> {
   //
   @override // FOR Validator
-  List<Failure> failures({required String value}) => value.contains('\n')
+  Iterable<Failure> failures({required String value}) => value.contains('\n')
       ? [
           Failure(
               'Failure: Value must be single line, Value: $value, Type: ${value.runtimeType}')
@@ -255,7 +255,7 @@ class ValidatorSingleLine implements Validator<String> {
 class ValidatorNotEmpty implements Validator<String> {
   //
   @override // FOR Validator
-  List<Failure> failures({required String value}) => value.isEmpty
+  Iterable<Failure> failures({required String value}) => value.isEmpty
       ? [
           Failure(
               'Failure: Value must not be empty, Value: $value, Type: ${value.runtimeType}')
@@ -280,7 +280,7 @@ class ValidatorNotEmpty implements Validator<String> {
 class ValidatorDateFormat implements Validator<String> {
   //
   @override // FOR Validator
-  List<Failure> failures({required String value}) =>
+  Iterable<Failure> failures({required String value}) =>
       DateTime.tryParse(value) != null
           ? []
           : [
@@ -292,8 +292,9 @@ class ValidatorDateFormat implements Validator<String> {
 class ValidatorPastDateTime implements Validator<String> {
   //
   @override // FOR Validator
-  List<Failure> failures({required String value}) {
-    var fList = ValidatorDateFormat().failures(value: value);
+  Iterable<Failure> failures({required String value}) {
+    var fList = <Failure>[];
+    fList.addAll(ValidatorDateFormat().failures(value: value));
     if (fList.isEmpty && DateTime.parse(value).compareTo(DateTime.now()) > 0) {
       fList.add(Failure(
           'Failure: Value must be a DateTime before now, Value: $value, Type: ${value.runtimeType}'));
@@ -320,7 +321,7 @@ class ValidatorPastDateTime implements Validator<String> {
 class ValidatorUuid implements Validator<String> {
   //
   @override // FOR ValidatorChecker
-  List<Failure> failures({required String value}) => value != ''
+  Iterable<Failure> failures({required String value}) => value != ''
       ? []
       : [
           Failure(

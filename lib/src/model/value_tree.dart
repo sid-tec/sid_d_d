@@ -8,30 +8,24 @@ import 'failure.dart';
 // #  Ver: 3.0 - last: 30/01/23
 // #  Nullsafety
 // #  Composite Pattern
-// #  Leaf Class for
+// #  Tree Class for
 // #  Validated Value Objects
 // #############################
 
-//@immutable
-//abstract class ValueLeaf<T> extends Equatable implements Value<T> {
 @immutable
-abstract class ValueLeaf<T> extends Equatable implements Value {
+class ValueTree extends Equatable implements Value<Iterable<Value>> {
   //
-  final T _value;
+  final Iterable<Value> _values;
   //
   final String _what;
-  //
-  final List<Failure> _failures;
 
   //
   // ===========================
-  const ValueLeaf({
-    required T value,
+  ValueTree({
     required String what,
-    required List<Failure> failures,
-  })  : _value = value,
-        _failures = failures,
-        _what = what;
+    required Iterable<Value> values,
+  })  : _what = what,
+        _values = values;
 
   //
   // ===========================
@@ -41,38 +35,36 @@ abstract class ValueLeaf<T> extends Equatable implements Value {
   //
   // ===========================
   @override // FOR Value
-  Iterable<Map<String, dynamic>> get values => [
-        {what: _value}
-      ];
-
-  //
-  // ===========================
-/*   @override // FOR Value
-  T whatValue(String what, T erro) => what == _what ? _value : erro; */
+  Iterable<Value> get value => _values;
 
   //
   // ===========================
   @override // FOR Value
-  Iterable<Map<String, dynamic>> get failures => [
-        {_what: _failures}
-      ];
+  Iterable<Failure> get failures {
+    //
+    var f = <Failure>[];
+    //
+    for (final value in _values) {
+      f.addAll(value.failures);
+    }
+    //
+    return f;
+  }
 
   //
   // ===========================
   @override // FOR Value
-  bool get valid => _failures.isEmpty;
+  bool get isValid => failures.isEmpty;
 
   //
   // ===========================
   @override // FOR Equatable
   bool get stringify => true;
-
   //
   // ===========================
   @override // FOR Equatable
   List<Object> get props => [
-        _value as Object,
-        _failures,
+        _values,
         _what,
       ];
 }

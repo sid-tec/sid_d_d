@@ -3,7 +3,6 @@
 // #  Nullsafety
 // #############################
 library sid_d_d;
-
 //
 export 'package:equatable/equatable.dart';
 export 'package:meta/meta.dart';
