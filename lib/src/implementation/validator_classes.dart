@@ -26,7 +26,7 @@ class ValidatorFunction implements Validator<dynamic> {
       ? []
       : [
           Failure(
-              'Failure: Fail to pass Function valitation, function: $functionLiteral, Value: $value, Type: ${value.runtimeType}'),
+              'Failure: Fail to pass Function valitation! Value: $value, Type: ${value.runtimeType}, Function: "$functionLiteral"'),
         ];
 }
 
@@ -72,16 +72,8 @@ class ValidatorNegative implements Validator<num> {
 // #  Ver: 3.0 - last: 30/01/23
 // #  Nullsafety
 // #  Class to check if is valid
-// #  a dynamic value
-// #  with a costum FUNCTION
+// #  a Min Num
 // #############################
-//
-// ===========================
-// ################################################
-// #  Ver: 3.0 - last: 19/01/23
-// #  Nullsafety
-// #  Class to check if is valid a Min Num
-// ################################################
 class ValidatorMinValue implements Validator<num> {
   //
   final num min;
@@ -233,7 +225,7 @@ class ValidatorSingleLine implements Validator<String> {
   Iterable<Failure> failures({required String value}) => value.contains('\n')
       ? [
           Failure(
-              'Failure: Value must be single line, Value: $value, Type: ${value.runtimeType}')
+              'Failure: Value must be single line, Value: ${value.replaceAll(RegExp(r'\n'), '\\n')}, Type: ${value.runtimeType}')
         ]
       : [];
 }
@@ -295,9 +287,27 @@ class ValidatorPastDateTime implements Validator<String> {
   Iterable<Failure> failures({required String value}) {
     var fList = <Failure>[];
     fList.addAll(ValidatorDateFormat().failures(value: value));
-    if (fList.isEmpty && DateTime.parse(value).compareTo(DateTime.now()) > 0) {
+    final now = DateTime.now();
+    final comparison = fList.isEmpty ? now.compareTo(DateTime.parse(value)) : 0;
+    if (fList.isEmpty && comparison < 1) {
       fList.add(Failure(
           'Failure: Value must be a DateTime before now, Value: $value, Type: ${value.runtimeType}'));
+    }
+    return fList;
+  }
+}
+
+class ValidatorFutureDateTime implements Validator<String> {
+  //
+  @override // FOR Validator
+  Iterable<Failure> failures({required String value}) {
+    var fList = <Failure>[];
+    fList.addAll(ValidatorDateFormat().failures(value: value));
+    final now = DateTime.now();
+    final comparison = fList.isEmpty ? now.compareTo(DateTime.parse(value)) : 0;
+    if (fList.isEmpty && comparison > -1) {
+      fList.add(Failure(
+          'Failure: Value must be a DateTime after now, Value: $value, Type: ${value.runtimeType}'));
     }
     return fList;
   }

@@ -1,3 +1,5 @@
+import 'package:equatable/equatable.dart';
+
 // #############################
 // #  Ver: 3.0 - last: 30/01/23
 // #  Nullsafety
@@ -5,7 +7,7 @@
 // #  Failure
 // #############################
 
-class Failure {
+class Failure extends Equatable {
   //
   // ===========================
   final String message;
@@ -18,6 +20,13 @@ class Failure {
   // ===========================
   @override
   String toString() => message;
+
+  //
+  // ===========================
+  @override // FOR Equatable
+  List<Object> get props => [
+        message,
+      ];
 }
 //
 //          ┈┈┈╭━━╮┈┈┈┈┈┈
