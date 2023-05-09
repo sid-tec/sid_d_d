@@ -7,8 +7,8 @@ void main() {
     'A group of tests for Failure class',
     () {
       final failure = Failure('Message of Failure');
-      final failureIguals = Failure('Message of Failure');
-      final failureDiferent = Failure('Diferent Message of Failure');
+      final sameFailure = Failure('Message of Failure');
+      final otherFailure = Failure('Diferent Message of Failure');
 
       setUp(() {/* Additional setup goes here. */});
 
@@ -21,6 +21,7 @@ void main() {
           );
         },
       );
+
       test(
         'Access To Message member',
         () {
@@ -30,15 +31,16 @@ void main() {
           );
         },
       );
+
       test(
         'Equality',
         () {
           expect(
-            failure == failureIguals,
+            failure == sameFailure,
             true,
           );
           expect(
-            failure == failureDiferent,
+            failure == otherFailure,
             false,
           );
         },

@@ -4,29 +4,63 @@ import 'package:sid_d_d/sid_d_d.dart';
 
 void main() {
   group(
-    'A group of tests for Validator Implemented Classes',
+    'A group of tests for Value Leaf Implemented Classes',
     () {
       setUp(() {/* Additional setup goes here. */});
-      // Function
+
+      // DeezerId
       test(
-        'Validator Function',
+        'DeezerId',
         () {
-          final functionNotHitlerValidation = ValidatorFunction(
-            function: (v) => v != 'Hitler',
-            functionLiteral: 'bool fun(v) => v != \'Hitler\';',
-          );
+          final good = DeezerId(value: 1, what: 'deezerId');
+          final goodToo = DeezerId(value: 11, what: 'deezerId');
+          final bad = DeezerId(value: 0, what: 'deezerId');
           final failure = Failure(
-              'Fail to pass Function valitation! Value: Hitler, Type: String, Function: "bool fun(v) => v != \'Hitler\';"');
+              'Value must be equal or higher than 1! Value: 0, Type: int');
           expect(
-            functionNotHitlerValidation.failures(value: 'Sid'),
+            good.isValid,
+            true,
+          );
+          expect(
+            good.what,
+            'deezerId',
+          );
+          expect(
+            goodToo.isValid,
+            true,
+          );
+          expect(
+            bad.isValid,
+            false,
+          );
+          expect(
+            good.value,
+            1,
+          );
+          expect(
+            goodToo.value,
+            11,
+          );
+          expect(
+            bad.value,
+            0,
+          );
+          expect(
+            good.failures,
             [],
           );
           expect(
-            functionNotHitlerValidation.failures(value: 'Hitler'),
+            goodToo.failures,
+            [],
+          );
+          expect(
+            bad.failures,
             [failure],
           );
         },
       );
+/* 
+      //=========================
       // Positive
       test(
         'Validator Positive',
@@ -42,7 +76,7 @@ void main() {
           );
           expect(
             validator.failures(value: -1),
-            [Failure('Value must be positive! Value: -1, Type: int')],
+            [Failure('Failure: Value must be positive, Value: -1, Type: int')],
           );
         },
       );
@@ -57,11 +91,11 @@ void main() {
           );
           expect(
             validator.failures(value: 0),
-            [Failure('Value must be negative! Value: 0, Type: int')],
+            [Failure('Failure: Value must be negative, Value: 0, Type: int')],
           );
           expect(
             validator.failures(value: 1),
-            [Failure('Value must be negative! Value: 1, Type: int')],
+            [Failure('Failure: Value must be negative, Value: 1, Type: int')],
           );
         },
       );
@@ -82,7 +116,7 @@ void main() {
             validator.failures(value: 4),
             [
               Failure(
-                  'Value must be equal or higher than 5! Value: 4, Type: int')
+                  'Failure: Value must equal or higher than 5, Value: 4, Type: int')
             ],
           );
         },
@@ -104,7 +138,7 @@ void main() {
             validator.failures(value: 6),
             [
               Failure(
-                  'Value must be equal or lower than 5! Value: 6, Type: int')
+                  'Failure: Value must be equal or lower than 5, Value: 6, Type: int')
             ],
           );
         },
@@ -121,7 +155,10 @@ void main() {
           );
           expect(
             validator.failures(value: '1'),
-            [Failure('Value must match "$regExp"! Value: 1, Type: String')],
+            [
+              Failure(
+                  'Failure: Value must match $regExp, Value: 1, Type: String')
+            ],
           );
         },
       );
@@ -142,7 +179,7 @@ void main() {
             validator.failures(value: 'A'),
             [
               Failure(
-                  'Value length must be higher than 2! Value: A, Type: String')
+                  'Failure: Value length must be higher than 2, Value: A, Type: String')
             ],
           );
         },
@@ -164,26 +201,8 @@ void main() {
             validator.failures(value: 'AAA'),
             [
               Failure(
-                  'Value length must be lower than 2! Value: AAA, Type: String')
+                  'Failure: Value length must be lower than 2, Value: AAA, Type: String')
             ],
-          );
-        },
-      );
-      // Not Empty
-      test(
-        'Validator for Not Empty',
-        () {
-          final validator = ValidatorNotEmpty();
-          final empty = '';
-          final notEmpty = 'A';
-
-          expect(
-            validator.failures(value: notEmpty),
-            [],
-          );
-          expect(
-            validator.failures(value: empty),
-            [Failure('Value must NOT be empty! Value: "", Type: String')],
           );
         },
       );
@@ -201,7 +220,7 @@ void main() {
             validator.failures(value: multiLine),
             [
               Failure(
-                  'Value must be single line! Value: ${multiLine.replaceAll(RegExp(r'\n'), '\\n')}, Type: String')
+                  'Failure: Value must be single line, Value: ${multiLine.replaceAll(RegExp(r'\n'), '\\n')}, Type: String')
             ],
           );
         },
@@ -219,7 +238,7 @@ void main() {
             validator.failures(value: 'A'),
             [
               Failure(
-                  'Value must be in DateTime format! Value: A, Type: String')
+                  'Failure: Value must be in DateTime format, Value: A, Type: String')
             ],
           );
         },
@@ -240,14 +259,14 @@ void main() {
             validator.failures(value: 'A'),
             [
               Failure(
-                  'Value must be in DateTime format! Value: A, Type: String')
+                  'Failure: Value must be in DateTime format, Value: A, Type: String')
             ],
           );
           expect(
             validator.failures(value: future.toString()),
             [
               Failure(
-                  'Value must be a DateTime before now! Value: $future, Type: String')
+                  'Failure: Value must be a DateTime before now, Value: $future, Type: String')
             ],
           );
         },
@@ -265,18 +284,18 @@ void main() {
             validator.failures(value: 'A'),
             [
               Failure(
-                  'Value must be in DateTime format! Value: A, Type: String')
+                  'Failure: Value must be in DateTime format, Value: A, Type: String')
             ],
           );
           expect(
             validator.failures(value: '1974-05-09 13:30:00'),
             [
               Failure(
-                  'Value must be a DateTime after now! Value: 1974-05-09 13:30:00, Type: String')
+                  'Failure: Value must be a DateTime after now, Value: 1974-05-09 13:30:00, Type: String')
             ],
           );
         },
-      );
+      ); */
     },
   );
 }

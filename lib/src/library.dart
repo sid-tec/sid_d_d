@@ -19,6 +19,7 @@ export 'implementation/validator_classes.dart'
         ValidatorMaxLength,
         ValidatorDateFormat,
         ValidatorPastDateTime,
+        ValidatorFutureDateTime,
         ValidatorPositive,
         ValidatorNegative,
         ValidatorMaxValue,

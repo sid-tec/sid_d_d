@@ -13,7 +13,7 @@ import 'failure.dart';
 // #############################
 
 @immutable
-class ValueTree extends Equatable implements Value<Iterable<Value>> {
+abstract class ValueTree extends Equatable implements Value<Iterable<Value>> {
   //
   final Iterable<Value> _values;
   //

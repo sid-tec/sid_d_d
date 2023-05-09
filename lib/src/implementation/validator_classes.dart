@@ -26,7 +26,7 @@ class ValidatorFunction implements Validator<dynamic> {
       ? []
       : [
           Failure(
-              'Failure: Fail to pass Function valitation! Value: $value, Type: ${value.runtimeType}, Function: "$functionLiteral"'),
+              'Fail to pass Function valitation! Value: $value, Type: ${value.runtimeType}, Function: "$functionLiteral"'),
         ];
 }
 
@@ -44,7 +44,7 @@ class ValidatorPositive implements Validator<num> {
   Iterable<Failure> failures({required num value}) => value.isNegative
       ? [
           Failure(
-              'Failure: Value must be positive, Value: $value, Type: ${value.runtimeType}'),
+              'Value must be positive! Value: $value, Type: ${value.runtimeType}'),
         ]
       : [];
 }
@@ -64,7 +64,7 @@ class ValidatorNegative implements Validator<num> {
       ? []
       : [
           Failure(
-              'Failure: Value must be negative, Value: $value, Type: ${value.runtimeType}')
+              'Value must be negative! Value: $value, Type: ${value.runtimeType}')
         ];
 }
 
@@ -85,7 +85,7 @@ class ValidatorMinValue implements Validator<num> {
       ? []
       : [
           Failure(
-              'Failure: Value must equal or higher than $min, Value: $value, Type: ${value.runtimeType}')
+              'Value must be equal or higher than $min! Value: $value, Type: ${value.runtimeType}')
         ];
 }
 
@@ -114,7 +114,7 @@ class ValidatorMaxValue implements Validator<num> {
       ? []
       : [
           Failure(
-              'Failure: Value must be equal or lower than $max, Value: $value, Type: ${value.runtimeType}')
+              'Value must be equal or lower than $max! Value: $value, Type: ${value.runtimeType}')
         ];
 }
 
@@ -143,7 +143,7 @@ class ValidatorRegExp implements Validator<String> {
       ? []
       : [
           Failure(
-              'Failure: Value must match $regExp, Value: $value, Type: ${value.runtimeType}')
+              'Value must match "$regExp"! Value: $value, Type: ${value.runtimeType}')
         ];
 }
 
@@ -172,7 +172,7 @@ class ValidatorMinLength implements Validator<String> {
       ? []
       : [
           Failure(
-              'Failure: Value length must be higher than $min, Value: $value, Type: ${value.runtimeType}')
+              'Value length must be higher than $min! Value: $value, Type: ${value.runtimeType}')
         ];
 }
 
@@ -201,7 +201,7 @@ class ValidatorMaxLength implements Validator<String> {
       ? []
       : [
           Failure(
-              'Failure: Value length must be lower than $max, Value: $value, Type: ${value.runtimeType}')
+              'Value length must be lower than $max! Value: $value, Type: ${value.runtimeType}')
         ];
 }
 
@@ -225,7 +225,7 @@ class ValidatorSingleLine implements Validator<String> {
   Iterable<Failure> failures({required String value}) => value.contains('\n')
       ? [
           Failure(
-              'Failure: Value must be single line, Value: ${value.replaceAll(RegExp(r'\n'), '\\n')}, Type: ${value.runtimeType}')
+              'Value must be single line! Value: ${value.replaceAll(RegExp(r'\n'), '\\n')}, Type: ${value.runtimeType}')
         ]
       : [];
 }
@@ -250,7 +250,7 @@ class ValidatorNotEmpty implements Validator<String> {
   Iterable<Failure> failures({required String value}) => value.isEmpty
       ? [
           Failure(
-              'Failure: Value must not be empty, Value: $value, Type: ${value.runtimeType}')
+              'Value must NOT be empty! Value: "$value", Type: ${value.runtimeType}')
         ]
       : [];
 }
@@ -277,7 +277,7 @@ class ValidatorDateFormat implements Validator<String> {
           ? []
           : [
               Failure(
-                  'Failure: Value must be in DateTime format, Value: $value, Type: ${value.runtimeType}')
+                  'Value must be in DateTime format! Value: $value, Type: ${value.runtimeType}')
             ];
 }
 
@@ -289,9 +289,9 @@ class ValidatorPastDateTime implements Validator<String> {
     fList.addAll(ValidatorDateFormat().failures(value: value));
     final now = DateTime.now();
     final comparison = fList.isEmpty ? now.compareTo(DateTime.parse(value)) : 0;
-    if (fList.isEmpty && comparison < 1) {
+    if (fList.isEmpty && comparison < 0) {
       fList.add(Failure(
-          'Failure: Value must be a DateTime before now, Value: $value, Type: ${value.runtimeType}'));
+          'Value must be a DateTime before now! Value: $value, Type: ${value.runtimeType}'));
     }
     return fList;
   }
@@ -305,9 +305,9 @@ class ValidatorFutureDateTime implements Validator<String> {
     fList.addAll(ValidatorDateFormat().failures(value: value));
     final now = DateTime.now();
     final comparison = fList.isEmpty ? now.compareTo(DateTime.parse(value)) : 0;
-    if (fList.isEmpty && comparison > -1) {
+    if (fList.isEmpty && comparison > 0) {
       fList.add(Failure(
-          'Failure: Value must be a DateTime after now, Value: $value, Type: ${value.runtimeType}'));
+          'Value must be a DateTime after now! Value: $value, Type: ${value.runtimeType}'));
     }
     return fList;
   }
@@ -335,7 +335,7 @@ class ValidatorUuid implements Validator<String> {
       ? []
       : [
           Failure(
-              'Failure: Value must be a valid UUid, Value: $value, Type: ${value.runtimeType}')
+              'Value must be a valid UUid! Value: $value, Type: ${value.runtimeType}')
         ];
 }
 //
