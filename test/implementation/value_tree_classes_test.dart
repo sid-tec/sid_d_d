@@ -20,7 +20,17 @@ void main() {
               nascimento1: '2012-04-03',
               nome2: 'Elisa',
               nascimento2: '1968-12-23');
-          print(sid);
+          final hitler = Person.create(
+              nome: 'Hitler',
+              nascimento: '1974-09-05',
+              idade: 35,
+              nome1: 'Hermes',
+              nascimento1: '2012-04-03',
+              nome2: 'Elisa',
+              nascimento2: '1968-12-23');
+          //print(sid);
+          //print(hitler);
+
           /* final good = DeezerId(value: 1, what: 'deezerId');
           final goodToo = DeezerId(value: 11, what: 'deezerId');
           final bad = DeezerId(value: 0, what: 'deezerId');
@@ -30,6 +40,42 @@ void main() {
             sid.isValid,
             true,
           );
+          expect(
+            sid.nome,
+            'Sedinir',
+          );
+          expect(
+            sid.nascimento,
+            '1974-09-05',
+          );
+          expect(
+            sid.idade,
+            35,
+          );
+          expect(
+            sid.endereco1.logradouro,
+            'Hermes',
+          );
+          expect(
+            sid.endereco2.numero,
+            '1968-12-23',
+          );
+          expect(
+            hitler.isValid,
+            false,
+          );
+          expect(
+            hitler.failures,
+            [
+              Failure(
+                  'Fail to pass Function valitation! Value: Hitler, Type: String, Function: "bool fun(v) => v != \'Hitler\';"')
+            ],
+          );
+          expect(
+            hitler.value.length,
+            6,
+          );
+
 /*           expect(
             good.what,
             'deezerId',

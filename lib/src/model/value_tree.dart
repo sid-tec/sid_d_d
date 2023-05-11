@@ -58,8 +58,17 @@ abstract class ValueTree extends Equatable implements Value<Iterable<Value>> {
 
   //
   // ===========================
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return '-- Value Tree $runtimeType  | What: $_what |  Values: $_values !!';
+  }
+
+/*   //
+  // ===========================
   @override // FOR Equatable
-  bool get stringify => true;
+  bool get stringify => true; */
   //
   // ===========================
   @override // FOR Equatable

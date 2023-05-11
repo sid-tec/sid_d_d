@@ -36,6 +36,9 @@ class Address extends ValueTree {
           ),
         ],
       );
+
+  String get logradouro => value.first.value;
+  String get numero => value.last.value;
 }
 
 // #############################
@@ -94,6 +97,13 @@ class Person extends ValueTree {
           ),
         ],
       );
+
+  String get uid => value.first.value;
+  String get nome => value.elementAt(1).value;
+  int get idade => value.elementAt(2).value;
+  String get nascimento => value.elementAt(3).value;
+  Address get endereco1 => value.elementAt(4) as Address;
+  Address get endereco2 => value.elementAt(5) as Address;
 }
 //
 //          ┈┈┈╭━━╮┈┈┈┈┈┈
