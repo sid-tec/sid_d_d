@@ -5,11 +5,13 @@
 // #  Sid D D
 // #############################
 
-export 'model/lib.dart';
+export 'failure.dart' show Failure;
+export 'validator.dart' show Validator;
 //
-export 'implementation/lib.dart';
+export 'value.dart' show Value;
+export 'value_leaf.dart' show ValueLeaf;
+export 'value_tree.dart' show ValueTree;
 //
-export 'helper.dart' show Helper;
 //
 //          ┈┈┈╭━━╮┈┈┈┈┈┈
 //          ┈┈╭╯┊◣╰━━━━╮┈┈
