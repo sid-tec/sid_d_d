@@ -25,6 +25,10 @@ export 'value_leaf_classes.dart'
         IdDeezer,
         LocalFile,
         UrlAddress,
-        Upc;
+        Upc,
+        ArtistName,
+        LocalPath,
+        Title,
+        Year;
 
 export 'value_tree_classes.dart' show Address, Person;
