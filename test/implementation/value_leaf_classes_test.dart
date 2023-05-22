@@ -12,9 +12,9 @@ void main() {
       test(
         'DeezerId',
         () {
-          final good = DeezerId(value: 1, what: 'deezerId');
-          final goodToo = DeezerId(value: 11, what: 'deezerId');
-          final bad = DeezerId(value: 0, what: 'deezerId');
+          final good = IdDeezer(value: 1, what: 'deezerId');
+          final goodToo = IdDeezer(value: 11, what: 'deezerId');
+          final bad = IdDeezer(value: 0, what: 'deezerId');
           final failure = Failure(
               'Value must be equal or higher than 1! Value: 0, Type: int');
           expect(

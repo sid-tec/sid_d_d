@@ -31,6 +31,106 @@ class ValidatorFunction implements Validator<dynamic> {
 }
 
 // #############################
+// #  Ver: 3.0 - last: 16/05/23
+// #  Nullsafety
+// #  Class to check if is valid
+// #  a dynamic value
+// #  with a costum FUNCTION
+// #############################
+class ValidatorIdDeezer implements Validator<int> {
+  //
+  @override // FOR ValidatorChecker
+  Iterable<Failure> failures({required int value}) {
+    var fList = <Failure>[];
+    fList.addAll(ValidatorPositive().failures(value: value));
+    fList.addAll(ValidatorMinValue(min: 1).failures(value: value));
+    return fList;
+  }
+}
+
+// #############################
+// #  Ver: 3.0 - last: 16/05/23
+// #  Nullsafety
+// #  Class to check if is valid
+// #  a dynamic value
+// #  with a costum FUNCTION
+// #############################
+class ValidatorYear20century implements Validator<int> {
+  //
+  @override // FOR ValidatorChecker
+  Iterable<Failure> failures({required int value}) {
+    var fList = <Failure>[];
+    fList.addAll(ValidatorPositive().failures(value: value));
+    fList.addAll(ValidatorMinValue(min: 1901).failures(value: value));
+    fList.addAll(
+        ValidatorMaxValue(max: DateTime.now().year).failures(value: value));
+    return fList;
+  }
+}
+
+// #############################
+// #  Ver: 3.0 - last: 16/05/23
+// #  Nullsafety
+// #  Class to check if is valid
+// #  a dynamic value
+// #  with a costum FUNCTION
+// #############################
+class ValidatorTitle implements Validator<String> {
+  //
+  @override // FOR ValidatorChecker
+  Iterable<Failure> failures({required String value}) {
+    var fList = <Failure>[];
+    fList.addAll(ValidatorNotEmpty().failures(value: value));
+    fList.addAll(ValidatorSingleLine().failures(value: value));
+    fList.addAll(ValidatorMinLength(min: 2).failures(value: value));
+    fList.addAll(ValidatorMaxLength(max: 130).failures(value: value));
+    return fList;
+  }
+}
+
+// #############################
+// #  Ver: 3.0 - last: 16/05/23
+// #  Nullsafety
+// #  Class to check if is valid
+// #  a dynamic value
+// #  with a costum FUNCTION
+// #############################
+class ValidatorArtistName implements Validator<String> {
+  //
+  @override // FOR ValidatorChecker
+  Iterable<Failure> failures({required String value}) {
+    var fList = <Failure>[];
+    fList.addAll(ValidatorNotEmpty().failures(value: value));
+    fList.addAll(ValidatorSingleLine().failures(value: value));
+    fList.addAll(ValidatorMinLength(min: 2).failures(value: value));
+    fList.addAll(ValidatorMaxLength(max: 130).failures(value: value));
+    return fList;
+  }
+}
+
+// #############################
+// #  Ver: 3.0 - last: 16/05/23
+// #  Nullsafety
+// #  Class to check if is valid
+// #  a dynamic value
+// #  with a costum FUNCTION
+// #############################
+class ValidatorArtists implements Validator<Iterable<int>> {
+  //
+  @override // FOR ValidatorChecker
+  Iterable<Failure> failures({required Iterable<int> value}) {
+    var fList = <Failure>[];
+    if (value.isEmpty) {
+      fList.add(Failure('An Album must have at least 1 Artist'));
+    }
+    for (var artist in value) {
+      fList.addAll(ValidatorIdDeezer().failures(value: artist));
+    }
+    return fList;
+  }
+}
+
+// #############################
 // #  Ver: 3.0 - last: 30/01/23
 // #  Nullsafety
 // #  Class to check if is valid

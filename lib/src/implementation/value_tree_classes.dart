@@ -72,7 +72,7 @@ class Person extends ValueTree {
       Person._(
         what: 'pessoa',
         values: [
-          UniqueId(value: uid),
+          UniqueId(uid: uid),
           Name(
             what: 'nome',
             value: nome,

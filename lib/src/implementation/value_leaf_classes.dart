@@ -4,131 +4,97 @@ import '../model/value_leaf.dart';
 import '../model/failure.dart';
 import 'validator_classes.dart';
 
-// #############################
-// #  Ver: 3.0 - last: 30/01/23
-// #  Nullsafety
-// #  Value Object Class for Unique ID
-// ############################
+// PRIMITIVES =============================================
 
+//
+// ===========================
+class Boolean extends ValueLeaf<bool> {
+  Boolean({required super.value, required super.what}) : super(failures: []);
+}
+
+// ID =================================================================
+
+//
+// ===========================
 class UniqueId extends ValueLeaf<String> {
-  //
-  // ===========================
-  UniqueId({required String value})
+  UniqueId({required String uid})
       : super(
-          value: value.isEmpty ? Uuid().v1() : value,
+          value: uid.isEmpty ? Uuid().v1() : uid,
           failures: [],
           what: 'uid',
         );
 }
 
-// #############################
-// #  Ver: 3.0 - last: 30/01/23
-// #  Nullsafety
-// #  Value Object Class for UPC
-// #############################
+//
+// ===========================
+class IdDeezer extends ValueLeaf<int> {
+  IdDeezer({required super.value, required super.what})
+      : super(failures: ValidatorIdDeezer().failures(value: value));
+}
+
+//
+// ===========================
 class Upc extends ValueLeaf<int> {
-  //
-  // ===========================
   static List<Failure> validators(int value) {
-    //
     final min = ValidatorMinValue(min: 1);
-    //
     var list = <Failure>[];
-    //
     list.addAll(min.failures(value: value));
-    //
     return list;
   }
 
-  //
-  // ===========================
   Upc({required super.value, required super.what})
       : super(
           failures: validators(value),
         );
 }
 
-// #############################
-// #  Ver: 3.0 - last: 30/01/23
-// #  Nullsafety
-// #  Value Object Class for Dezzer ID
-// #############################
+// DATE TIME ==========================================================
 
-class DeezerId extends ValueLeaf<int> {
-  //
-  // ===========================
-  static List<Failure> validators(int value) {
-    //
-    final min = ValidatorMinValue(min: 1);
-    //
-    var list = <Failure>[];
-    //
-    list.addAll(min.failures(value: value));
-    //
-    return list;
-  }
-
-  //
-  // ===========================
-  DeezerId({required super.value, required super.what})
-      : super(
-          failures: validators(value),
-        );
-}
-
-// #############################
-// #  Ver: 3.0 - last: 30/01/23
-// #  Nullsafety
-// #  Value Object Class for Date Format
-// #############################
-
+//
+// ===========================
 class Date extends ValueLeaf<String> {
-  //
-  // ===========================
   Date({required super.value, required super.what})
       : super(
           failures: ValidatorDateFormat().failures(value: value),
         );
 }
 
-// #############################
-// #  Ver: 3.0 - last: 30/01/23
-// #  Nullsafety
-// #  Value Object Class for Seconds
-// #############################
-
-class DurationSeconds extends ValueLeaf<int> {
-  //
-  // ===========================
-  DurationSeconds({required super.value, required super.what})
+//
+// ===========================
+class Seconds extends ValueLeaf<int> {
+  Seconds({required super.value, required super.what})
       : super(
           failures: ValidatorPositive().failures(value: value),
         );
 }
 
-// #############################
-// #  Ver: 3.0 - last: 30/01/23
-// #  Nullsafety
-// #  Value Object Class for Boolean
-// #############################
-
-class BoolVo extends ValueLeaf<bool> {
-  //
-  // ===========================
-  BoolVo({required super.value, required super.what}) : super(failures: []);
+//
+// ===========================
+class Year extends ValueLeaf<int> {
+  Year({required super.value, required super.what})
+      : super(failures: ValidatorYear20century().failures(value: value));
 }
 
-// #############################
-// #  Ver: 3.0 - last: 30/01/23
-// #  Nullsafety
-// #  Value Object Class for Name String
-// #############################
+// NAMES TITLES ETC STRING ===============================================
 
+//
+// ===========================
+class ArtistName extends ValueLeaf<String> {
+  ArtistName({required super.value, required super.what})
+      : super(failures: ValidatorArtistName().failures(value: value));
+}
+
+//
+// ===========================
+class Title extends ValueLeaf<String> {
+  Title({required super.value, required super.what})
+      : super(failures: ValidatorTitle().failures(value: value));
+}
+
+//
+// ===========================
 class Name extends ValueLeaf<String> {
-  //
-  // ===========================
   static List<Failure> validators(String value) {
-    //
     final notEmpty = ValidatorNotEmpty();
     final singleLine = ValidatorSingleLine();
     final minLength = ValidatorMinLength(min: 4);
@@ -138,79 +104,45 @@ class Name extends ValueLeaf<String> {
       function: (v) => v != 'Hitler',
       functionLiteral: 'bool fun(v) => v != \'Hitler\';',
     );
-    //
     var list = <Failure>[];
-    //
     list.addAll(notEmpty.failures(value: value));
     list.addAll(singleLine.failures(value: value));
     list.addAll(minLength.failures(value: value));
     list.addAll(maxLength.failures(value: value));
     list.addAll(regExp.failures(value: value));
     list.addAll(function.failures(value: value));
-    //
     return list;
   }
 
-  //
-  // ===========================
   Name({required super.value, required super.what})
       : super(
           failures: validators(value),
         );
 }
 
-// #############################
-// #  Ver: 3.0 - last: 30/01/23
-// #  Nullsafety
-// #  Value Object Class for URL Address
-// #############################
+// INTERNET E FILE SYSTEM ===============================================
 
+//
+// ===========================
 class UrlAddress extends ValueLeaf<String> {
-  //
-  // ===========================
   static List<Failure> validators(String value) {
-    //
-    final notEmpty = ValidatorNotEmpty();
-    final singleLine = ValidatorSingleLine();
-    final minLength = ValidatorMinLength(min: 4);
-    final maxLength = ValidatorMaxLength(max: 10);
-    final regExp = ValidatorRegExp(regExp: RegExp(r'^[a-zA-Z\s]+$'));
-    final function = ValidatorFunction(
-      function: (v) => v != 'Hitler',
-      functionLiteral: 'bool fun(v) => v != \'Hitler\';',
-    );
-    //
     var list = <Failure>[];
-    //
-    list.addAll(notEmpty.failures(value: value));
-    list.addAll(singleLine.failures(value: value));
-    list.addAll(minLength.failures(value: value));
-    list.addAll(maxLength.failures(value: value));
-    list.addAll(regExp.failures(value: value));
-    list.addAll(function.failures(value: value));
-    //
+    list.addAll(ValidatorNotEmpty().failures(value: value));
+    list.addAll(ValidatorSingleLine().failures(value: value));
+    final regExp =
+        RegExp(r'(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+');
+    list.addAll(ValidatorRegExp(regExp: regExp).failures(value: value));
     return list;
   }
 
-  //
-  // ===========================
   UrlAddress({required super.value, required super.what})
-      : super(
-          failures: validators(value),
-        );
+      : super(failures: validators(value));
 }
 
-// #############################
-// #  Ver: 3.0 - last: 30/01/23
-// #  Nullsafety
-// #  Value Object Class for Local File
-// #############################
-
+//
+// ===========================
 class LocalFile extends ValueLeaf<String> {
-  //
-  // ===========================
   static List<Failure> validators(String value) {
-    //
     final notEmpty = ValidatorNotEmpty();
     final singleLine = ValidatorSingleLine();
     final minLength = ValidatorMinLength(min: 4);
@@ -220,22 +152,50 @@ class LocalFile extends ValueLeaf<String> {
       function: (v) => v != 'Hitler',
       functionLiteral: 'bool fun(v) => v != \'Hitler\';',
     );
-    //
     var list = <Failure>[];
-    //
     list.addAll(notEmpty.failures(value: value));
     list.addAll(singleLine.failures(value: value));
     list.addAll(minLength.failures(value: value));
     list.addAll(maxLength.failures(value: value));
     list.addAll(regExp.failures(value: value));
     list.addAll(function.failures(value: value));
-    //
     return list;
   }
 
   //
   // ===========================
   LocalFile({required super.value, required super.what})
+      : super(
+          failures: validators(value),
+        );
+}
+
+//
+// ===========================
+class LocalPath extends ValueLeaf<String> {
+  static List<Failure> validators(String value) {
+    final notEmpty = ValidatorNotEmpty();
+    final singleLine = ValidatorSingleLine();
+    final minLength = ValidatorMinLength(min: 4);
+    final maxLength = ValidatorMaxLength(max: 10);
+    final regExp = ValidatorRegExp(regExp: RegExp(r'^[a-zA-Z\s]+$'));
+    final function = ValidatorFunction(
+      function: (v) => v != 'Hitler',
+      functionLiteral: 'bool fun(v) => v != \'Hitler\';',
+    );
+    var list = <Failure>[];
+    list.addAll(notEmpty.failures(value: value));
+    list.addAll(singleLine.failures(value: value));
+    list.addAll(minLength.failures(value: value));
+    list.addAll(maxLength.failures(value: value));
+    list.addAll(regExp.failures(value: value));
+    list.addAll(function.failures(value: value));
+    return list;
+  }
+
+  //
+  // ===========================
+  LocalPath({required super.value, required super.what})
       : super(
           failures: validators(value),
         );

@@ -18,11 +18,11 @@ export 'validator_classes.dart'
 export 'value_leaf_classes.dart'
     show
         UniqueId,
-        BoolVo,
+        Boolean,
         Name,
         Date,
-        DurationSeconds,
-        DeezerId,
+        Seconds,
+        IdDeezer,
         LocalFile,
         UrlAddress,
         Upc;
