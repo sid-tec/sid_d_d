@@ -9,6 +9,9 @@ export 'model/lib.dart';
 //
 export 'implementation/lib.dart';
 //
+export 'repository/lib.dart';
+
+//
 export 'helper.dart' show Helper;
 //
 //          ┈┈┈╭━━╮┈┈┈┈┈┈
