@@ -58,8 +58,22 @@ abstract class ValueLeaf<T> extends Equatable implements Value<T> {
   @override
   String toString() {
     // TODO: implement toString
-    return '-- Value Leaf $runtimeType | What: $_what | Type: ${_value.runtimeType} | Value: $_value | Failures: $_failures !!';
+    return '| Value Leaf $runtimeType | What: $_what | Type: ${_value.runtimeType} | Value: $_value | Failures: $_failures !';
   }
+
+  //
+  // ===========================
+  @override
+  Map<String, dynamic> toMap() => {what: value};
+
+/*  
+
+  //
+  // ===========================
+  factory ValueLeaf.fromMap(Map<String, T> map) {
+    return ValueLeaf(what: map[''])
+
+  } */
 
   //
   // ===========================

@@ -24,6 +24,14 @@ abstract class Value<T> {
 
   //
   // ===========================
+  Map<String, dynamic> toMap();
+
+/*   //
+  // ===========================
+  Value.fromMap(Map<String, T> map); */
+
+  //
+  // ===========================
   bool get isValid;
 }
 //
