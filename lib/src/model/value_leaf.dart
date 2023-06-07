@@ -66,15 +66,6 @@ abstract class ValueLeaf<T> extends Equatable implements Value<T> {
   @override
   Map<String, dynamic> toMap() => {what: value};
 
-/*  
-
-  //
-  // ===========================
-  factory ValueLeaf.fromMap(Map<String, T> map) {
-    return ValueLeaf(what: map[''])
-
-  } */
-
   //
   // ===========================
   @override // FOR Equatable
