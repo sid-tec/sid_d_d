@@ -5,27 +5,21 @@
 // #  Interface Class for
 // #  Validated Value Objects
 // #############################
-
-//abstract class Value<T> {
 import 'package:sid_d_d/sid_d_d.dart';
 
-abstract class Value<T> {
+abstract interface class Value<T> {
   //
   // ===========================
   String get what;
-
   //
   // ===========================
   T get value;
-
   //
   // ===========================
   Iterable<Failure> get failures;
-
   //
   // ===========================
   Map<String, dynamic> toMap();
-
   //
   // ===========================
   bool get isValid;
