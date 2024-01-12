@@ -6,7 +6,7 @@ description: A librarie for implement Domain Driven Design in Dart.
 version: 3.0.0
 # homepage: https://www.example.com
 environment:
-  sdk: '>=3.0.2 <4.0.0'
+  sdk: '>=3.2.3 <4.0.0'
   
 dev_dependencies:
   lints: ^2.0.1
