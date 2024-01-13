@@ -354,6 +354,39 @@ class ValidatorNotEmpty implements Validator<String> {
         ]
       : [];
 }
+// ################################################
+// #  Ver: 3.0 - last: 19/01/23
+// #  Nullsafety
+// #  Class to check if is valid a String  Empty
+// ################################################
+class ValidatorOneWord implements Validator<String> {
+  //
+  @override // FOR Validator
+  Iterable<Failure> failures({required String value}) => value.contains(' ')
+      ? [
+          Failure(
+              'Value must be only one word, without spaces! Value: "$value", Type: ${value.runtimeType}')
+        ]
+      : [];
+}
+
+// ################################################
+// #  Ver: 3.0 - last: 19/01/23
+// #  Nullsafety
+// #  Class to check if is valid a String  Empty
+// ################################################
+class ValidatorPoliWords implements Validator<String> {
+  //
+  @override // FOR Validator
+  Iterable<Failure> failures({required String value}) 
+    => value.indexOf(' ') > 0 
+    && value.substring(value.length-1) != ' '
+      ? []
+      : [
+          Failure(
+              'Value must be more than one word, with space! Value: "$value", Type: ${value.runtimeType}')
+        ];
+}
 
 // #############################
 // #  Ver: 3.0 - last: 30/01/23

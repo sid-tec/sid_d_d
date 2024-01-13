@@ -13,7 +13,8 @@ export 'validator_classes.dart'
         ValidatorPositive,
         ValidatorNegative,
         ValidatorMaxValue,
-        ValidatorMinValue;
+        ValidatorMinValue,
+        ValidatorOneWord;
 
 export 'value_leaf_classes.dart'
     show

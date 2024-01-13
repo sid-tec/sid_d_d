@@ -1,3 +1,4 @@
+import 'package:sid_d_d/src/implementation/validator_classes.dart';
 import 'package:test/test.dart';
 //
 import 'package:sid_d_d/sid_d_d.dart';
@@ -206,6 +207,46 @@ void main() {
           );
         },
       );
+      // One Word
+      test(
+        'Validator for One Word',
+        () {
+          final validator = ValidatorOneWord();
+          final oneWord = 'A';
+          final poliWord = 'A A';
+          expect(
+            validator.failures(value: oneWord),
+            [],
+          );
+          expect(
+            validator.failures(value: poliWord),
+            [
+              Failure(
+                'Value must be only one word, without spaces! Value: "$poliWord", Type: String')
+            ],
+          );
+        },
+      );
+      // Poli Word
+      test(
+        'Validator for Poli Words',
+        () {
+          final validator = ValidatorPoliWords();
+          final oneWord = 'A';
+          final poliWord = 'A A';
+          expect(
+            validator.failures(value: poliWord),
+            [],
+          );
+          expect(
+            validator.failures(value: oneWord),
+            [
+              Failure(
+                'Value must be more than one word, with space! Value: "$oneWord", Type: String')
+            ],
+          );
+        },
+      );
       // Date Format
       test(
         'Validator for Date Format',
@@ -279,4 +320,7 @@ void main() {
       );
     },
   );
+
+
+
 }
